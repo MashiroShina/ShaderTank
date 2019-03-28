@@ -46,8 +46,10 @@
 			    float2 uv = i.globalTexcoord;
 				fixed4 color = tex2D(_MainTex, i.localTexcoord.xy);
 				fixed4 color1 = tex2D(_BackGround,i.localTexcoord.xy);
+
 				fixed4 Mixcolors;
 				#if defined(_CLIPPING_NULL)
+				
 				#if defined(_HAVECOLOR_OFF)
 				color1.rgb = dot(color1.rgb, fixed3(.222, .707, .071)) * 0.3;
 				color.rgb = dot(color.rgb, fixed3(.222,.707,.071));
@@ -55,18 +57,16 @@
                 fixed rb = color1.r / alpha;
                 Mixcolors = fixed4(rb, rb, rb, alpha);
                 return Mixcolors;
-                #endif
-                
-                #if defined(_HAVECOLOR_ON)
+				#elif defined(_HAVECOLOR_ON)
                 fixed scale = 0.2;
-				fixed alpha = dot(color1.rgb, fixed3(.222, .707, .071)) * scale;
+				fixed alphas = dot(color1.rgb, fixed3(.222, .707, .071)) * scale;
                 color1 = color1 * scale;
                 fixed maxc = max(max(color1.r, color1.g), color1.b);
-                alpha = max(1 - color.r + alpha, maxc);
-                fixed r1 = color1.r / alpha;
-                fixed g1 = color1.g / alpha;
-                fixed b1 = color1.b / alpha;
-                Mixcolors = fixed4(r1, g1, b1, alpha);
+				alphas = max(1 - color.r + alphas, maxc);
+                fixed r1 = color1.r / alphas;
+                fixed g1 = color1.g / alphas;
+                fixed b1 = color1.b / alphas;
+                Mixcolors = fixed4(r1, g1, b1, alphas);
                 return Mixcolors;
                 #endif
                 #endif

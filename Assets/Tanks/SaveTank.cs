@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using SFB;
 using UnityEngine;
@@ -11,48 +10,58 @@ public class SaveTank : MonoBehaviour {
 	public RawImage image;
 	public Shader sb;
 	public Material mt;
+    public Material mt2;
 	public RenderTexture rt;
-	
+    private void Awake()
+    {
+        //mt.DisableKeyword("_CLIPPING_OFF");
+        //mt.DisableKeyword("_CLIPPING_ON");
+        //mt.DisableKeyword("_HAVECOLOR_NULL");
+        //mt.DisableKeyword("_HAVECOLOR_OFF");
+        //mt.DisableKeyword("_HAVECOLOR_ON");
+        //mt.DisableKeyword("_CLIPPING_NULL");
+    }
 
-	private void Update()
+    private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			Shader.DisableKeyword("_HAVECOLOR_ON");
-			Shader.DisableKeyword("_HAVECOLOR_OFF");
-			Shader.DisableKeyword("_CLIPPING_NULL");
-			Shader.DisableKeyword("_CLIPPING_OFF");
-			Shader.EnableKeyword("_CLIPPING_ON");
-			Shader.EnableKeyword("_HAVECOLOR_NULL");
-		}
-		if (Input.GetKeyDown(KeyCode.O))
-		{
-			Shader.DisableKeyword("_CLIPPING_OFF");
-			Shader.DisableKeyword("_CLIPPING_ON");
-			Shader.DisableKeyword("_HAVECOLOR_OFF");
-			Shader.DisableKeyword("_HAVECOLOR_NULL");
-			Shader.EnableKeyword("_CLIPPING_NULL");
-			Shader.EnableKeyword("_HAVECOLOR_ON");
-		}
-		if (Input.GetKeyDown(KeyCode.I))
-		{
-			Shader.DisableKeyword("_CLIPPING_OFF");
-			Shader.DisableKeyword("_CLIPPING_ON");
-			Shader.EnableKeyword("_HAVECOLOR_OFF");
-			Shader.DisableKeyword("_HAVECOLOR_NULL");
-			Shader.EnableKeyword("_CLIPPING_NULL");
-			Shader.DisableKeyword("_HAVECOLOR_ON");
-		}
-		if (Input.GetKeyDown(KeyCode.U))
-		{
-			Shader.EnableKeyword("_CLIPPING_OFF");
-			Shader.DisableKeyword("_CLIPPING_ON");
-			Shader.DisableKeyword("_HAVECOLOR_OFF");
-			Shader.DisableKeyword("_HAVECOLOR_NULL");
-			Shader.DisableKeyword("_CLIPPING_NULL");
-			Shader.DisableKeyword("_HAVECOLOR_ON");
-		}
-		if (Input.GetKey(KeyCode.K))
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    //mt.DisableKeyword("_HAVECOLOR_ON");
+        //    //mt.DisableKeyword("_HAVECOLOR_OFF");
+        //    //mt.DisableKeyword("_CLIPPING_NULL");
+        //    //mt.DisableKeyword("_CLIPPING_OFF");
+        //    //mt.EnableKeyword("_CLIPPING_ON");
+        //    //mt.EnableKeyword("_HAVECOLOR_NULL");
+        
+        //}
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //          mt.DisableKeyword("_CLIPPING_OFF");
+        //          mt.DisableKeyword("_CLIPPING_ON");
+        //          mt.DisableKeyword("_HAVECOLOR_OFF");
+        //          mt.DisableKeyword("_HAVECOLOR_NULL");
+        //          mt.EnableKeyword("_CLIPPING_NULL");
+        //          mt.EnableKeyword("_HAVECOLOR_ON");
+        //}
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //          mt.DisableKeyword("_CLIPPING_OFF");
+        //          mt.DisableKeyword("_CLIPPING_ON");
+        //          mt.EnableKeyword("_HAVECOLOR_OFF");
+        //          mt.DisableKeyword("_HAVECOLOR_NULL");
+        //          mt.EnableKeyword("_CLIPPING_NULL");
+        //          mt.DisableKeyword("_HAVECOLOR_ON");
+        //}
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //          mt.EnableKeyword("_CLIPPING_OFF");
+        //          mt.DisableKeyword("_CLIPPING_ON");
+        //          mt.DisableKeyword("_HAVECOLOR_OFF");
+        //          mt.DisableKeyword("_HAVECOLOR_NULL");
+        //          mt.DisableKeyword("_CLIPPING_NULL");
+        //          mt.DisableKeyword("_HAVECOLOR_ON");
+        //}
+        if (Input.GetKey(KeyCode.K))
 		{
 			DumpRenderTexture(rt,Application.dataPath+"Tank.png");
 			Debug.Log("OK");
@@ -66,24 +75,24 @@ public class SaveTank : MonoBehaviour {
 	}
 	public void OnlyColor(bool not)
 	{
-		if (!not)
-		{
-			Shader.EnableKeyword("_CLIPPING_OFF");
-			Shader.DisableKeyword("_CLIPPING_ON");
-			Shader.DisableKeyword("_HAVECOLOR_OFF");
-			Shader.DisableKeyword("_HAVECOLOR_NULL");
-			Shader.DisableKeyword("_CLIPPING_NULL");
-			Shader.DisableKeyword("_HAVECOLOR_ON");
-		}
-		else
-		{
-			Shader.DisableKeyword("_CLIPPING_OFF");
-			Shader.DisableKeyword("_CLIPPING_ON");
-			Shader.EnableKeyword("_HAVECOLOR_OFF");
-			Shader.DisableKeyword("_HAVECOLOR_NULL");
-			Shader.EnableKeyword("_CLIPPING_NULL");
-			Shader.DisableKeyword("_HAVECOLOR_ON");
-		}
+		//if (!not)
+		//{
+  //          mt.DisableKeyword("_CLIPPING_OFF");
+  //          mt.DisableKeyword("_CLIPPING_ON");
+  //          mt.DisableKeyword("_HAVECOLOR_NULL");
+  //          mt.DisableKeyword("_HAVECOLOR_OFF");
+  //          mt.EnableKeyword("_HAVECOLOR_ON");
+  //          mt.EnableKeyword("_CLIPPING_NULL");
+  //      }
+		//else
+		//{
+  //          mt.DisableKeyword("_CLIPPING_OFF");
+  //          mt.DisableKeyword("_CLIPPING_ON");
+  //          mt.DisableKeyword("_HAVECOLOR_NULL");
+  //          mt.DisableKeyword("_HAVECOLOR_ON");
+  //          mt.EnableKeyword("_HAVECOLOR_OFF");
+  //          mt.EnableKeyword("_CLIPPING_NULL");
+  //      }
 	}
 
 	public void savePngs()
@@ -98,7 +107,12 @@ public class SaveTank : MonoBehaviour {
 		RenderTexture.active = rt;
 		tex.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
 		tex.Apply();
-		File.WriteAllBytes(pngOutPath, tex.EncodeToPNG());
+        var path = StandaloneFileBrowser.SaveFilePanel("Title", "", "sample", "png");
+        if (!string.IsNullOrEmpty(path))
+        {
+            File.WriteAllBytes(path, tex.EncodeToPNG());
+        }
+       // File.WriteAllBytes(pngOutPath, tex.EncodeToPNG());
 		RenderTexture.active = oldRT;
 	}
 
@@ -115,6 +129,7 @@ public class SaveTank : MonoBehaviour {
 		yield return loader;
 		Texture2D t= loader.texture;
 		mt.SetTexture(tex,t);
-	}
+        mt2.SetTexture(tex, t);
+    }
 
 }
